@@ -1,0 +1,25 @@
+sudo: required
+dist: xenial
+
+language: python
+
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8'
+
+install:
+  - pip install tox-travis
+
+script:
+  - tox
+  - tox -e lint
+
+deploy:
+  provider: pypi
+  user: "__token__"
+  password:
+    secure: "zoklW1G25tsz1TCIXThHyUpQh6x72DpmrxW4dCPp4Nw1eNuPgtr3V374bo980OLupf+XKcoCAjVA6i6JP2dhrkLrw4vdbZo6+KERsrRczfhdvfXJ+rQ4gA0ODMMhXKISKmLSoB4QWCDk7z5af0mccHB5HvNOebnCTOH46F5TMoVvIHduu5I9VNy+8ZMvL5mjYtyok/+sryl5LfBgIwfcc4ZQiBX/zmj1iE37jwfG+e6NH1QWmy/MwHVmK58UkER6O5U9TV7rbbn/zyYw9Kov+Tmg8fFfJ2x8WytewEIfpF7XWuH5cMm/0t4q5o2OzBj9TP/aFCp5+JR5C7TgAboRb22aYD5HJLCE67r2uHiY0F0X3hBmacdI5gHoA72InVejHlArnXYEsrio1joTMw3uCuy5oVDMRTefku/kjLhE9q+Agx3lXhjnzvzPBiURDf7yWkoO7ede9XCTcDWWQk1WXZPHW3U+BbiucVJoLnfUiFdAX1xDVsUaSyYFjZsS1xhogA9Lh8S2IRuojkNuKG7uvhoI3pzyx7r50WDrDnvofRVZ8rz7txrNn3VhjUA4X/v8AfuM2q64Cy83eR7OzjPk5mNrbQ6U5TFUA6M12wnz+HwyQBnXWLFBo6xbIzDySPCb99ZdmZwvaIF8fJ3TXYFIkahURW8P3ZJK1caGS1gkkGo="
+  on:
+    python: 3.6
+  distributions: "bdist_wheel"

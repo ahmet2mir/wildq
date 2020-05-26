@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <general>
+      <user>admin</user>
+   </general>
+   <keys>
+      <element>
+         <key>value1</key>
+      </element>
+      <element>
+         <key>value2</key>
+      </element>
+      <element>alone</element>
+   </keys>
+</root>

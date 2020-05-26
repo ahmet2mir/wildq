@@ -1,0 +1,11 @@
+[run]
+branch = True
+source = wildq
+omit = wildq/__main__.py
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
+
+[html]
+directory = html

@@ -1,0 +1,10 @@
+{
+    "general": {
+        "user": "admin"
+    },
+    "keys": [
+        {"key": "value1"},
+        {"key": "value2"},
+        "alone"
+    ]
+}
