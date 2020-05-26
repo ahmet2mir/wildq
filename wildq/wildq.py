@@ -52,9 +52,6 @@ def cli(args):
 
     if not sys.stdin.isatty():
         content = "".join(sys.stdin)
-        if not content:
-            print("Content from stdin is empty, unable to continue.")
-            return 3
     else:
         if len(args) < 4:
             print("Missing file in args")
@@ -63,6 +60,10 @@ def cli(args):
             print("Unable to open file " + args[3])
         with open(args[3], "r") as fd:
             content = fd.read()
+
+    # skip silently if content is empty
+    if not content:
+        return 0
 
     return run(sys.argv[1], sys.argv[2], content)
 
