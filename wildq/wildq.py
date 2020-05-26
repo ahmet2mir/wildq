@@ -43,19 +43,22 @@ def run(filetype, jq_filter, content):
 def cli(args):
     if len(args) < 3:
         usage()
-        sys.exit(1)
+        return 1
 
     if args[1] not in ["--yaml", "--json", "--toml", "--ini", "--xml", "--hcl"]:
         print("Bad format " + args[1])
         usage()
-        sys.exit(2)
+        return 2
 
     if not sys.stdin.isatty():
         content = "".join(sys.stdin)
+        if not content:
+            print("Content from stdin is empty, unable to continue.")
+            return 3
     else:
         if len(args) < 4:
             print("Missing file in args")
-            sys.exit(1)
+            return 4
         if not os.path.exists(args[3]):
             print("Unable to open file " + args[3])
         with open(args[3], "r") as fd:
