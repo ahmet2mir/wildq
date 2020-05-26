@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 import sys
 import json
 import configparser
@@ -55,6 +56,8 @@ def cli(args):
         if len(args) < 4:
             print("Missing file in args")
             sys.exit(1)
+        if not os.path.exists(args[3]):
+            print("Unable to open file " + args[3])
         with open(args[3], "r") as fd:
             content = fd.read()
 
