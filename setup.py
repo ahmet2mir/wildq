@@ -41,17 +41,21 @@ setup(
         "ini",
         "parser",
         "shell",
+        "hcl",
     ],
     packages=find_packages(),
     package_data={"": ["README.md"]},
     python_requires=">=3.5",
-    entry_points={"console_scripts": ["wildq=wildq.wildq:main", "wq=wildq.wildq:main"]},
+    entry_points={
+        "console_scripts": ["wildq=wildq.wildq:main", "wq=wildq.wildq:main"]
+    },
     install_requires=[
         "setuptools",
         "PyYAML >= 3.11",
         "toml >= 0.9.4",
         "xmltodict >= 0.12.0",
         "jq >= 1.0.1",
+        "pyhcl >= 0.4.4",
     ],
     classifiers=[
         "Intended Audience :: Developers",
@@ -62,5 +66,5 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Build Tools",
-    ]
+    ],
 )

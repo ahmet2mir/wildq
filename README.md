@@ -1,4 +1,4 @@
-# wildq - Command-line TOML/JSON/INI/YAML/XML processor using jq c bindings
+# wildq - Command-line TOML/JSON/INI/YAML/XML/HCL processor using jq c bindings
 
 ![GitHub](https://img.shields.io/github/license/ahmet2mir/wildq.svg)
 [![image](https://img.shields.io/pypi/pyversions/wildq.svg)](https://python.org/pypi/wildq)
@@ -13,6 +13,7 @@ This script uses:
 * @martinblech [xmldict](https://github.com/martinblech/xmltodict) to manage XML
 * @uiri [toml](https://github.com/uiri/toml) to manage TOML
 * @yaml [pyyaml](https://github.com/yaml/pyyaml) to manage YAML
+* @virtuald [pyhcl](https://github.com/virtuald/pyhcl) to manage HCL
 * for INI [ConfigParser](https://docs.python.org/3/library/configparser.html) is used.
 
 # Installation
@@ -24,7 +25,7 @@ pip install wildq
 # Usage
 
 ```
-wildq [--yaml|--json|--toml|--ini|--xml <jq filter> [file]
+wildq [--yaml|--json|--toml|--ini|--xml|--hcl> <jq filter> [file]
 ```
 
 Output is similar to `jq -MCr` (no color, no compact and no quote on single value)
@@ -126,6 +127,17 @@ cat examples/yaml.yaml  | wildq --yaml ".keys[]"
     "key2": "value2"
 }
 alone
+```
+
+For HCL
+```sh
+cat examples/hcl.hcl  | wildq --hcl ".keys[]"
+{
+    "key": "value1"
+}
+{
+    "key": "value2"
+}
 ```
 
 ## Contributing

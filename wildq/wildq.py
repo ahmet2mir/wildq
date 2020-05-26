@@ -5,13 +5,14 @@ import configparser
 
 # third parties
 import jq
+import hcl
 import yaml
 import toml
 import xmltodict
 
 
 def usage():
-    print("wildq <--yaml|--json|--toml|--ini|--xml> <jq filter> [file]")
+    print("wildq <--yaml|--json|--toml|--ini|--xml|--hcl> <jq filter> [file]")
     return 0
 
 
@@ -29,6 +30,7 @@ def run(filetype, jq_filter, content):
         "--toml": toml.loads,
         "--ini": ini_load_string,
         "--xml": xmltodict.parse,
+        "--hcl": hcl.loads,
     }
 
     data = filetypes[filetype](content)
@@ -42,7 +44,7 @@ def cli(args):
         usage()
         sys.exit(1)
 
-    if args[1] not in ["--yaml", "--json", "--toml", "--ini", "--xml"]:
+    if args[1] not in ["--yaml", "--json", "--toml", "--ini", "--xml", "--hcl"]:
         print("Bad format " + args[1])
         usage()
         sys.exit(2)
