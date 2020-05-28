@@ -28,6 +28,8 @@ pip install wildq
 wildq [--yaml|--json|--toml|--ini|--xml|--hcl> <jq filter> [file]
 ```
 
+There is also a shorter command `wq` comming with the package.
+
 Output is similar to `jq -MCr` (no color, no compact and no quote on single value)
 
 Like `jq cli`, wildq supports both of stdin and file to the function
@@ -64,6 +66,18 @@ or
 
 ```sh
 wildq --json ".keys[]" examples/json.json
+{
+    "key": "value1"
+}
+{
+    "key": "value2"
+}
+alone
+```
+or
+
+```sh
+wq --json ".keys[]" examples/json.json
 {
     "key": "value1"
 }
@@ -139,6 +153,25 @@ cat examples/hcl.hcl  | wildq --hcl ".keys[]"
     "key": "value2"
 }
 ```
+
+## Tips and tricks
+
+Loop on keys in bash without creating a subshell
+
+```sh
+wildq --toml "keys[]" examples/toml.toml | while read -r key 
+do
+    echo "Getting key ${key}"
+done
+```
+
+## TODO
+
+- [ ] support all jq types
+- [ ] add tests...
+- [ ] add more control over filters and files
+- [ ] detect automagically filetype
+- [ ] use click for the CLI
 
 ## Contributing
 
