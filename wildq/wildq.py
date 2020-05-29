@@ -1,4 +1,5 @@
 # coding: utf-8
+import io
 import os
 import sys
 import json
@@ -50,15 +51,17 @@ def cli(args):
         usage()
         return 2
 
-    if not sys.stdin.isatty():
-        content = "".join(sys.stdin)
+    file = sys.stdin
+    if len(sys.argv) >= 4:
+        if not os.path.exists(sys.argv[3]):
+            print("Unable to open file " + sys.argv[3])
+            return 1
+        file = sys.argv[3]
+
+    if isinstance(file, io.TextIOWrapper):
+        content = file.read()
     else:
-        if len(args) < 4:
-            print("Missing file in args")
-            return 4
-        if not os.path.exists(args[3]):
-            print("Unable to open file " + args[3])
-        with open(args[3], "r") as fd:
+        with open(file, "r") as fd:
             content = fd.read()
 
     # skip silently if content is empty
