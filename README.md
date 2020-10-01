@@ -3,6 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/ahmet2mir/wildq.svg)
 [![image](https://img.shields.io/pypi/pyversions/wildq.svg)](https://python.org/pypi/wildq)
 [![Build Status](https://travis-ci.org/ahmet2mir/wildq.svg?branch=master)](https://travis-ci.org/ahmet2mir/wildq)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fahmet2mir%2Fwildq.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fahmet2mir%2Fwildq?ref=badge_shield)
 
 Purpose of this package is to provide a simple wrapper arround jq for different formats.
 I'm tired of searching a package doing yaml jq, toml jq, ini jq etc. mainly used for scripting.
@@ -181,3 +182,6 @@ Merge requests are welcome :)
 ## License
 
 Licensed under the terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fahmet2mir%2Fwildq.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fahmet2mir%2Fwildq?ref=badge_large)
