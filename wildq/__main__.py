@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-from wildq.wildq import main
+from wildq.cli import cli
 
 if __name__ == "__main__":
-    main()
+    cli()

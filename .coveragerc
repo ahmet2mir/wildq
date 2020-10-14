@@ -1,7 +1,11 @@
 [run]
 branch = True
 source = wildq
-omit = wildq/__main__.py
+omit =
+  wildq/__main__.py
+  wildq/_wildq_version.py
+  tests/data/*
+  */site-packages/*
 
 [report]
 exclude_lines =

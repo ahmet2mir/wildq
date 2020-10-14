@@ -1,0 +1,84 @@
+name: Publish packages
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    outputs:
+      id: ${{ steps.draft_release.outputs.id }}
+      html_url: ${{ steps.draft_release.outputs.html_url }}
+      upload_url: ${{ steps.draft_release.outputs.upload_url }}
+    steps:
+      - name: Create release
+        id: draft_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+
+  assets:
+    name: Release packages
+    runs-on: ${{ matrix.os }}
+    needs: create_release
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - name: Check out src from Git
+        uses: actions/checkout@v2
+
+      - name: Get history and tags for SCM versioning to work
+        run: |
+          git fetch --prune --unshallow
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m pip install -U setuptools pipenv wheel
+          make init sync
+          python setup.py --version
+          make build binary
+          zip --junk-paths wildq-${{runner.os}}-x86_64 dist/wq dist/wildq
+          rm -f dist/wq dist/wildq 
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ./wildq-${{runner.os}}-x86_64.zip
+          asset_name: wildq-${{runner.os}}-x86_64.zip
+          asset_content_type: application/zip
+
+      - name: Publish distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          password: ${{ secrets.GH_ACTIONS_WILD }}
+
+      - name: Unset draft
+        if: matrix.os == 'ubuntu-latest'
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.create_release.outputs.id }}

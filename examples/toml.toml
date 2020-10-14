@@ -1,5 +1,5 @@
 
-keys = [ "alone" ]
+# keys = [ "alone" ] # produce an error on dump only
 
 [[keys]]
 key = "value1"
