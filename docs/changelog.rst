@@ -2,6 +2,13 @@
 Changelog
 =========
 
+v1.1.3 - 12/10/2020
+===================
+
+- fix package brew
+- tempfix remove RPM (must be build on centos)
+- tempfix remove binary (must be build with lower version of glibc)
+
 v1.1.2 - 12/10/2020
 ===================
 

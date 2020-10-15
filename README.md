@@ -24,14 +24,6 @@ pip install wildq
 
 A binary is also available for different platform, pick one (both of `wildq` and `wq` will be in the archive)
 
-## GNU/Linux binary
-
-```
-curl https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq-v1.1.2-linux-x86_64.tar.gz -o wildq-v1.1.2-linux-x86_64.tar.gz
-tar xvfz wildq-v1.1.2-linux-x86_64.tar.gz -C /usr/local/bin
-rm -f wildq-v1.1.2-linux-x86_64.tar.gz
-```
-
 ## MacOS
 
 ```
@@ -39,17 +31,11 @@ brew install ahmet2mir/tap/wildq
 brew install ahmet2mir/tap/wq
 ```
 
-## RPM (no gpg signature)
-
-```
-yum install -y --nogpgcheck https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq-1.1.2-1.x86_64.rpm
-```
-
 ## Debian (no gpg signature)
 
 ```
-wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq_1.1.2-1_amd64.deb
-dpkg -i wildq_1.1.2-1_amd64.deb
+wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.3/wildq_1.1.3-1_amd64.deb
+dpkg -i wildq_1.1.3-1_amd64.deb
 ```
 
 ## Windows
@@ -74,7 +60,7 @@ If anybody would contribute, there is an [open issue](https://github.com/mwillia
 
 ```
 $ wildq -i help
-Usage: wildq [OPTIONS] [FILE] JQ_FILTER
+Usage: wildq [OPTIONS] JQ_FILTER [FILE]
 
 Options:
   -c, --compact-output            compact instead of pretty-printed output

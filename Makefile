@@ -35,26 +35,27 @@ build: sync
 	cat wildq/_wildq_version.py
 	${PIPENV_CMD} python setup.py bdist_wheel
 	mkdir -p artifacts/archives
-	mkdir -p artifacts/archives/binaries
-	mkdir -p artifacts/archives/brew
-	mkdir -p artifacts/archives/deb
-	mkdir -p artifacts/archives/rpm
+	mkdir -p artifacts/binaries
+	mkdir -p artifacts/brew
+	mkdir -p artifacts/deb
+	mkdir -p artifacts/rpm
 
 binary: build
 	${PIPENV_CMD} pyinstaller --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
 	chmod +x artifacts/binaries/wildq
 	cp artifacts/binaries/wildq artifacts/binaries/wq
+	cp README.md LICENSE artifacts/binaries
 	./tests/tests.sh
 
 archive-linux: binary
-	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-linux-x86_64.tar.gz artifacts/binaries/wq artifacts/binaries/wildq README.md LICENSE
+	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-linux-x86_64.tar.gz -C artifacts/binaries wq wildq README.md LICENSE
 	sha256sum artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-linux-x86_64.tar.gz
 
 archive-macos: binary
-	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz artifacts/binaries/wq artifacts/binaries/wildq README.md LICENSE
+	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz wq wildq README.md LICENSE
 	sha256sum artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz
 
-package-rpm:
+package-rpm: archive-linux
 	mkdir -p artifacts/rpm/usr/bin/
 	cp artifacts/binaries/wildq artifacts/rpm/usr/bin/wildq
 	cp artifacts/binaries/wildq artifacts/rpm/usr/bin/wq
@@ -70,7 +71,7 @@ package-rpm:
 		--rpm-attr "755,root,root:/usr/bin/wq" \
 		.
 
-package-deb:
+package-deb: archive-linux
 	mkdir -p artifacts/deb/usr/bin/
 	cp artifacts/binaries/wildq artifacts/deb/usr/bin/wildq
 	cp artifacts/binaries/wildq artifacts/deb/usr/bin/wq

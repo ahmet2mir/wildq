@@ -105,8 +105,8 @@ def compiler(jq_filter, data):
     show_default=False,
     help="Define the content type of printed output, mutally exclusive with Combined option (default input format)",
 )
-@click.argument("file", type=click.File("r"), default=sys.stdin)
 @click.argument("jq_filter")
+@click.argument("file", type=click.File("r"), default=sys.stdin)
 def cli(*args, **kwargs):
     from pprint import pprint
 

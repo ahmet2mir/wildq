@@ -61,8 +61,8 @@ setup(
             "identify==1.5.6; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "idna==2.10; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "imagesize==1.2.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "importlib-metadata==2.0.0; python_version < '3.8'",
-            "importlib-resources==3.0.0; python_version < '3.7'",
+            "importlib-metadata==2.0.0; python_version < '3.8' and python_version < '3.8'",
+            "importlib-resources==3.0.0; python_version < '3.7' and python_version < '3.7'",
             "jinja2==2.11.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "markupsafe==1.1.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "mccabe==0.6.1",
@@ -83,14 +83,15 @@ setup(
             "pygments==2.7.1",
             "pyinstaller==4.0",
             "pyinstaller-hooks-contrib==2020.9",
-            "pyparsing==2.4.7; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "python-dateutil==2.8.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "pyparsing==2.4.7; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2'",
+            "python-dateutil==2.8.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "pytz==2020.1",
             "pyyaml==5.3.1",
             "regex==2020.10.11",
             "requests==2.24.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "requirementslib==1.5.13; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
-            "six==1.15.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "setuptools-scm==4.1.2",
+            "six==1.15.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "smmap==3.0.4; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "snowballstemmer==2.0.0",
             "sphinx==3.2.1",
@@ -111,7 +112,7 @@ setup(
             "virtualenv-clone==0.5.4; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "vistir==0.5.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "wheel==0.35.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
-            "zipp==3.3.0; python_version < '3.8'",
+            "zipp==3.3.0; python_version < '3.8' and python_version < '3.8'",
         ]
     },
     install_requires=[
@@ -138,7 +139,6 @@ setup(
         "Changelog": "https://wildq.readthedocs.io/en/latest/changelog.html"
     },
     license="Apache 2.0",
-
     python_requires=">=3.6",
     zip_safe=False,
     entry_points={
