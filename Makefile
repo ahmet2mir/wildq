@@ -52,7 +52,7 @@ archive-linux: binary
 	sha256sum artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-linux-x86_64.tar.gz
 
 archive-macos: binary
-	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz wq wildq README.md LICENSE
+	tar cfz artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz -C artifacts/binaries wq wildq README.md LICENSE
 	sha256sum artifacts/archives/wildq-$(PYTHON_WILDQ_VERSION)-darwin-x86_64.tar.gz
 
 package-rpm: archive-linux

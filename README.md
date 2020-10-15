@@ -34,8 +34,8 @@ brew install ahmet2mir/tap/wq
 ## Debian (no gpg signature)
 
 ```
-wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.3/wildq_1.1.3-1_amd64.deb
-dpkg -i wildq_1.1.3-1_amd64.deb
+wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.4/wildq_1.1.4-1_amd64.deb
+dpkg -i wildq_1.1.4-1_amd64.deb
 ```
 
 ## Windows
