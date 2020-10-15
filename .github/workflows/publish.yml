@@ -66,7 +66,7 @@ jobs:
           make init archive-macos package-brew
 
       - name: Upload Release Asset
-        uses: softprops/action-gh-release@v1
+        uses: ahmet2mir/softprops-action-gh-release@v1
         with:
           files: |
             ./artifacts/archives/*.tar.gz
@@ -76,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish distribution to PyPI
-        uses: pypa/gh-action-pypi-publish@master
+        uses: ahmet2mir/pypa-gh-action-pypi-publish@master
         if: matrix.os == 'ubuntu-latest'
         with:
           password: ${{ secrets.GH_ACTIONS_WILD }}
@@ -87,7 +87,7 @@ jobs:
     needs: [assets, create_release]
     steps:
       - name: Unset draft
-        uses: eregon/publish-release@v1
+        uses: ahmet2mir/eregon-publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
