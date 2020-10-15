@@ -22,27 +22,37 @@ This script uses:
 pip install wildq
 ```
 
-## Binary
-
 A binary is also available for different platform, pick one (both of `wildq` and `wq` will be in the archive)
 
-### GNU/Linux
+## GNU/Linux binary
 
 ```
-curl https://github.com/ahmet2mir/wildq/archive/1.0.6.zip -o wildq.zip
-unzip wildq.zip -d ~~/bin~~
-rm -f wildq.zip
+curl https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq-v1.1.2-linux-x86_64.tar.gz -o wildq-v1.1.2-linux-x86_64.tar.gz
+tar xvfz wildq-v1.1.2-linux-x86_64.tar.gz -C /usr/local/bin
+rm -f wildq-v1.1.2-linux-x86_64.tar.gz
 ```
 
-### MacOS
+## MacOS
 
 ```
-curl https://github.com/ahmet2mir/wildq/archive/1.0.6.zip -o wildq.zip
-unzip wildq.zip -d ~/bin~
-rm -f wildq.zip
+brew install ahmet2mir/tap/wildq
+brew install ahmet2mir/tap/wq
 ```
 
-### Windows
+## RPM (no gpg signature)
+
+```
+yum install -y --nogpgcheck https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq-1.1.2-1.x86_64.rpm
+```
+
+## Debian (no gpg signature)
+
+```
+wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.2/wildq_1.1.2-1_amd64.deb
+dpkg -i wildq_1.1.2-1_amd64.deb
+```
+
+## Windows
 
 Wildq use [jq.py](https://github.com/mwilliamson/jq.py) and it's not yet available on windows platforms.
 I tried to compile it without windows machine and I failed, and I don't had the time to try to understand how Windows / C binding / Python works.
@@ -264,3 +274,8 @@ Merge requests are welcome :)
 ## License
 
 Licensed under the terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+
+## Repository URL
+
+https://github.com/ahmet2mir/wildq

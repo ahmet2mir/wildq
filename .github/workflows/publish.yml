@@ -49,25 +49,31 @@ jobs:
         with:
           python-version: 3.6
 
-      - name: Build a binary wheel and a source tarball
+      - name: Init environment and build package for GNU/Linux
+        if: matrix.os == 'ubuntu-latest'
         run: |
-          python -m pip install -U setuptools pipenv wheel
-          make init sync
-          python setup.py --version
-          make build binary
-          zip --junk-paths wildq-${{runner.os}}-x86_64 dist/wq dist/wildq
-          rm -f dist/wq dist/wildq 
+          sudo apt-get install -y ruby ruby-dev rubygems build-essential
+          gem install --user --no-document fpm
+          export PATH=/home/runner/.gem/ruby/2.5.0/bin:$PATH
+          make init archive-linux package-rpm package-deb
+
+      - name: Init environment and build package for OSX
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install gnu-tar
+          brew install coreutils
+          gem install --user --no-document fpm
+          make init archive-macos package-brew
 
       - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./artifacts/archives/*.tar.gz
+            ./artifacts/rpm/*.rpm
+            ./artifacts/deb/*.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./wildq-${{runner.os}}-x86_64.zip
-          asset_name: wildq-${{runner.os}}-x86_64.zip
-          asset_content_type: application/zip
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@master
@@ -75,8 +81,12 @@ jobs:
         with:
           password: ${{ secrets.GH_ACTIONS_WILD }}
 
+  finish_release:
+    name: Finish release
+    runs-on: ubuntu-latest
+    needs: [assets, create_release]
+    steps:
       - name: Unset draft
-        if: matrix.os == 'ubuntu-latest'
         uses: eregon/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -191,3 +191,4 @@ pip-wheel-metadata/
 .idea
 *.swp
 Pipfile.lock
+artifacts
