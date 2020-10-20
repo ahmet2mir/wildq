@@ -2,6 +2,12 @@
 Changelog
 =========
 
+v1.1.5 - 20/10/2020
+===================
+
+- Compile using glibc 2.17 to get compatibility with lot of GNU/Linux distros
+- fix release actions
+
 v1.1.4 - 12/10/2020
 ===================
 

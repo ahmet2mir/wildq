@@ -1,3 +1,5 @@
+
+
 # wildq - Command-line TOML/JSON/INI/YAML/XML/HCL processor using jq c bindings
 
 ![GitHub](https://img.shields.io/github/license/ahmet2mir/wildq.svg)
@@ -31,12 +33,40 @@ brew install ahmet2mir/tap/wildq
 brew install ahmet2mir/tap/wq
 ```
 
-## Debian (no gpg signature)
+## GNU/Linux Binary
+
+Compiled using glibc 2.17, it should work on lot of stable/LTS distros.
 
 ```
-wget https://github.com/ahmet2mir/wildq/releases/download/v1.1.4/wildq_1.1.4-1_amd64.deb
-dpkg -i wildq_1.1.4-1_amd64.deb
+mkdir -p ~/bin/
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq-1.1.5-linux-x86_64.tar.gz -o wildq-1.1.5-linux-x86_64.tar.gz
+tar xvfz wildq-1.1.5-linux-x86_64.tar.gz -C ~/bin
+export PATH="~/bin:$PATH"
+
+wq --help
+wildq --help
 ```
+
+## Debian (no gpg signature) >= 10
+
+```
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq_1.1.5-1_amd64.deb -o wildq_1.1.5-1_amd64.deb
+sudo dpkg -i wildq_1.1.5-1_amd64.deb
+
+wq --help
+wildq --help
+```
+
+## Centos (no gpg singature) >= 7
+
+```
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq-1.1.5-1.x86_64.rpm -o wildq-1.1.5-1.x86_64.rpm
+sudo yum install -y ./wildq-1.1.5-1.x86_64.rpm
+
+wq --help
+wildq --help
+```
+
 
 ## Windows
 

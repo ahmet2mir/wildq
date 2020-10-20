@@ -6,29 +6,9 @@ on:
     - 'v*'
 
 jobs:
-  create_release:
-    name: Create release
-    runs-on: ubuntu-latest
-    outputs:
-      id: ${{ steps.draft_release.outputs.id }}
-      html_url: ${{ steps.draft_release.outputs.html_url }}
-      upload_url: ${{ steps.draft_release.outputs.upload_url }}
-    steps:
-      - name: Create release
-        id: draft_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: false
-
   assets:
     name: Release packages
     runs-on: ${{ matrix.os }}
-    needs: create_release
     strategy:
       fail-fast: false
       matrix:
@@ -39,23 +19,21 @@ jobs:
       - name: Check out src from Git
         uses: actions/checkout@v2
 
-      - name: Get history and tags for SCM versioning to work
-        run: |
-          git fetch --prune --unshallow
-          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
       - name: Set up Python 3.6
         uses: actions/setup-python@v1
+        if: matrix.os == 'macos-latest'
         with:
           python-version: 3.6
 
+      # Lower version of glibc is always compatible with greater version
+      # So the binary will we runnable on probably all linux stable/LTS distros
+      # https://pyinstaller.readthedocs.io/en/stable/usage.html#making-gnu-linux-apps-forward-compatible
+      # So I use a custom python image with pyinstaller on centos7 (glibc 2.17)
       - name: Init environment and build package for GNU/Linux
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get install -y ruby ruby-dev rubygems build-essential
-          gem install --user --no-document fpm
-          export PATH=/home/runner/.gem/ruby/2.5.0/bin:$PATH
-          make init archive-linux package-rpm package-deb
+        uses: ahmet2mir/docker-python@master
+        with:
+          make_args: init archive-linux package-rpm package-deb
 
       - name: Init environment and build package for OSX
         if: matrix.os == 'macos-latest'
@@ -80,15 +58,3 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         with:
           password: ${{ secrets.GH_ACTIONS_WILD }}
-
-  finish_release:
-    name: Finish release
-    runs-on: ubuntu-latest
-    needs: [assets, create_release]
-    steps:
-      - name: Unset draft
-        uses: ahmet2mir/eregon-publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ needs.create_release.outputs.id }}

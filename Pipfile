@@ -25,6 +25,3 @@ jq = "*"
 pyhcl = "*"
 click = "*"
 pygments = "*"
-
-[requires]
-python_version = "3.6"
