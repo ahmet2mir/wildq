@@ -4,7 +4,7 @@
 
 ![GitHub](https://img.shields.io/github/license/ahmet2mir/wildq.svg)
 [![image](https://img.shields.io/pypi/pyversions/wildq.svg)](https://python.org/pypi/wildq)
-[![Build Status](https://travis-ci.org/ahmet2mir/wildq.svg?branch=master)](https://travis-ci.org/ahmet2mir/wildq)
+[![Build Status](https://github.com/ahmet2mir/wildq/workflows/Unit%20Tests/badge.svg)](https://github.com/ahmet2mir/wildq/actions)
 
 Purpose of this package is to provide a simple wrapper arround jq for different formats.
 I'm tired of searching a package doing yaml jq, toml jq, ini jq etc. mainly used for scripting.
