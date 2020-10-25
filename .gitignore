@@ -191,4 +191,7 @@ pip-wheel-metadata/
 .idea
 *.swp
 Pipfile.lock
-artifacts
+artifacts/
+dev.py
+upx/
+init

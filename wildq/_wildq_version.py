@@ -1,1 +1,1 @@
-version = "1.1.5"
+version = "0.0.0"  # managed by poetry-dynamic-versioning

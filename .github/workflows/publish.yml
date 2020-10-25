@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Check out src from Git
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.6
         uses: actions/setup-python@v1
@@ -29,19 +31,19 @@ jobs:
       # So the binary will we runnable on probably all linux stable/LTS distros
       # https://pyinstaller.readthedocs.io/en/stable/usage.html#making-gnu-linux-apps-forward-compatible
       # So I use a custom python image with pyinstaller on centos7 (glibc 2.17)
-      - name: Init environment and build package for GNU/Linux
+      - name: Build package for GNU/Linux
         if: matrix.os == 'ubuntu-latest'
         uses: ahmet2mir/docker-python@master
         with:
-          make_args: init archive-linux package-rpm package-deb
+          make_args: init_pip test build binary-linux binary-tests archive-linux package-rpm package-deb
 
-      - name: Init environment and build package for OSX
+      - name: Build package for OSX
         if: matrix.os == 'macos-latest'
         run: |
           brew install gnu-tar
           brew install coreutils
           gem install --user --no-document fpm
-          make init archive-macos package-brew
+          make init_pip test build binary-macos binary-tests archive-macos package-brew
 
       - name: Upload Release Asset
         uses: ahmet2mir/softprops-action-gh-release@v1

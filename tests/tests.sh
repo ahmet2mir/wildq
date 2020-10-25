@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo "Query with old format"
-./artifacts/binaries/wildq --hcl  . examples/hcl.hcl   | jq .
-./artifacts/binaries/wildq --ini  . examples/ini.ini   | jq .
-./artifacts/binaries/wildq --json . examples/json.json | jq .
-./artifacts/binaries/wildq --toml . examples/toml.toml | jq .
-./artifacts/binaries/wildq --xml  . examples/xml.xml   | jq .
-./artifacts/binaries/wildq --yaml . examples/yaml.yaml | jq .
+./artifacts/binaries/wildq --hcl  . examples/hcl.hcl   | ./artifacts/binaries/wildq -i json .
+./artifacts/binaries/wildq --ini  . examples/ini.ini   | ./artifacts/binaries/wildq -i json .
+./artifacts/binaries/wildq --json . examples/json.json | ./artifacts/binaries/wildq -i json .
+./artifacts/binaries/wildq --toml . examples/toml.toml | ./artifacts/binaries/wildq -i json .
+./artifacts/binaries/wildq --xml  . examples/xml.xml   | ./artifacts/binaries/wildq -i json .
+./artifacts/binaries/wildq --yaml . examples/yaml.yaml | ./artifacts/binaries/wildq -i json .
 
 echo "Query with same in and out"
 ./artifacts/binaries/wildq -i hcl  . examples/hcl.hcl
