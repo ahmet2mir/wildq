@@ -73,33 +73,32 @@ build: poetry.lock
 	poetry build
 
 binary-linux: upx build
-	@echo "Target binary"
+	@echo "Target binary-linux"
 	poetry run pyinstaller --upx-dir=upx --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
-	chmod +x artifacts/binaries/wildq
-	cp artifacts/binaries/wildq artifacts/binaries/wq
-	cp README.md LICENSE artifacts/binaries
-	du -hs ./artifacts/binaries/pipeline
 
 binary-macos: build
-	@echo "Target binary"
+	@echo "Target binary-macos"
 	brew install upx
 	ls /usr/local/Cellar/upx/3.96/bin
 	poetry run pyinstaller --upx-dir=/usr/local/Cellar/upx/3.96/bin   --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
+
+binary-copy:
 	chmod +x artifacts/binaries/wildq
 	cp artifacts/binaries/wildq artifacts/binaries/wq
 	cp README.md LICENSE artifacts/binaries
-	du -hs ./artifacts/binaries/pipeline
+	du -hs ./artifacts/binaries/wildq
+	du -hs ./artifacts/binaries/wq
 
-binary-tests: binary
+binary-tests: binary-copy
 	@echo "Target binary-tests"
 	sh -e ./tests/tests.sh
 
-archive-linux: binary
+archive-linux: binary-copy
 	@echo "Target archive-linux"
 	tar cfz artifacts/archives/wildq-$(shell poetry version --no-ansi --short)-linux-x86_64.tar.gz -C artifacts/binaries wq wildq README.md LICENSE
 	sha256sum artifacts/archives/wildq-$(shell poetry version --no-ansi --short)-linux-x86_64.tar.gz
 
-archive-macos: binary
+archive-macos: binary-copy
 	@echo "Target archive-macos"
 	tar cfz artifacts/archives/wildq-$(shell poetry version --no-ansi --short)-darwin-x86_64.tar.gz -C artifacts/binaries wq wildq README.md LICENSE
 	sha256sum artifacts/archives/wildq-$(shell poetry version --no-ansi --short)-darwin-x86_64.tar.gz
@@ -152,4 +151,4 @@ clean-venv:
 	@echo "Target clean-venv"
 	@poetry env remove $$(poetry env list --no-ansi | tail -n 1 | cut -d' ' -f1)
 
-.PHONY: all archive-linux archive-macos binary binary-linux binary-macos binary-tests build clean clean-venv docs fmt list package-brew package-deb package-rpm pypi syntax test 
+.PHONY: all archive-linux archive-macos binary binary-linux binary-macos binary-copy binary-tests build clean clean-venv docs fmt list package-brew package-deb package-rpm pypi syntax test 
