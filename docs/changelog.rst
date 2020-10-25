@@ -2,6 +2,17 @@
 Changelog
 =========
 
+v1.1.7 - 25/10/2020
+===================
+
+- Adding version output
+
+v1.1.6 - 25/10/2020
+===================
+
+- Move to poetry and reduce binary with upx
+- Fix du cmd and refactor binary
+
 v1.1.5 - 20/10/2020
 ===================
 

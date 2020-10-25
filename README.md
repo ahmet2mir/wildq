@@ -18,13 +18,21 @@ This script uses:
 
 # Installation
 
+You could install via pipx, pip, brew, deb, rpm or fallback to binary version.
+
+## Pipx
+
+`pipx` install and run python applications in isolated environments
+
+```sh
+pipx install wildq
+```
+
 ## Pip
 
 ```sh
 pip install wildq
 ```
-
-A binary is also available for different platform, pick one (both of `wildq` and `wq` will be in the archive)
 
 ## MacOS
 
@@ -33,25 +41,12 @@ brew install ahmet2mir/tap/wildq
 brew install ahmet2mir/tap/wq
 ```
 
-## GNU/Linux Binary
-
-Compiled using glibc 2.17, it should work on lot of stable/LTS distros.
-
-```
-mkdir -p ~/bin/
-curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq-1.1.5-linux-x86_64.tar.gz -o wildq-1.1.5-linux-x86_64.tar.gz
-tar xvfz wildq-1.1.5-linux-x86_64.tar.gz -C ~/bin
-export PATH="~/bin:$PATH"
-
-wq --help
-wildq --help
-```
-
 ## Debian (no gpg signature) >= 10
 
 ```
-curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq_1.1.5-1_amd64.deb -o wildq_1.1.5-1_amd64.deb
-sudo dpkg -i wildq_1.1.5-1_amd64.deb
+VERSION=$(curl -s "https://api.github.com/repos/ahmet2mir/wildq/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v${VERSION}/wildq_${VERSION}-1_amd64.deb -o wildq_${VERSION}-1_amd64.deb
+sudo dpkg -i wildq_${VERSION}-1_amd64.deb
 
 wq --help
 wildq --help
@@ -60,13 +55,28 @@ wildq --help
 ## Centos (no gpg singature) >= 7
 
 ```
-curl -sL https://github.com/ahmet2mir/wildq/releases/download/v1.1.5/wildq-1.1.5-1.x86_64.rpm -o wildq-1.1.5-1.x86_64.rpm
-sudo yum install -y ./wildq-1.1.5-1.x86_64.rpm
+VERSION=$(curl -s "https://api.github.com/repos/ahmet2mir/wildq/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v${VERSION}/wildq-${VERSION}-1.x86_64.rpm -o wildq-${VERSION}-1.x86_64.rpm
+sudo yum install -y ./wildq-${VERSION}-1.x86_64.rpm
 
 wq --help
 wildq --help
 ```
 
+## GNU/Linux Binary
+
+Compiled using glibc 2.17, it should work on lot of stable/LTS distros.
+
+```
+mkdir -p ~/bin/
+VERSION=$(curl -s "https://api.github.com/repos/ahmet2mir/wildq/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -sL https://github.com/ahmet2mir/wildq/releases/download/v${VERSION}/wildq-${VERSION}-linux-x86_64.tar.gz -o wildq-${VERSION}-linux-x86_64.tar.gz
+tar xvfz wildq-${VERSION}-linux-x86_64.tar.gz -C ~/bin
+export PATH="~/bin:$PATH"
+
+wq --help
+wildq --help
+```
 
 ## Windows
 
