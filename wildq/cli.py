@@ -7,6 +7,12 @@ import click
 
 # local
 import wildq.filetypes
+from wildq._wildq_version import __version__
+
+
+class Config:
+    pass
+
 
 # could be replaced by importlib / getattr but explicit is better than implicit
 SUPPORTED_FILETYPES = {
@@ -17,6 +23,8 @@ SUPPORTED_FILETYPES = {
     "xml": wildq.filetypes.xml_type,
     "yaml": wildq.filetypes.yaml_type,
 }
+
+PASS_CONFIG = click.make_pass_decorator(Config, ensure=True)
 
 
 def compiler(jq_filter, data):
@@ -107,6 +115,7 @@ def compiler(jq_filter, data):
 )
 @click.argument("jq_filter")
 @click.argument("file", type=click.File("r"), default=sys.stdin)
+@click.version_option(version=__version__)
 def cli(*args, **kwargs):
     from pprint import pprint
 
