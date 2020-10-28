@@ -67,13 +67,13 @@ def compiler(jq_filter, data):
     "--hcl",
     is_flag=True,
     default=False,
-    help="Combine --input hcl --output hcl, mutally exclusive with other Combined options",
+    help="Combine --input hcl --output json, mutally exclusive with other Combined options",
 )
 @click.option(
     "--ini",
     is_flag=True,
     default=False,
-    help="Combine --input ini --output ini, mutally exclusive with other Combined options",
+    help="Combine --input ini --output json, mutally exclusive with other Combined options",
 )
 @click.option(
     "--json",
@@ -85,19 +85,19 @@ def compiler(jq_filter, data):
     "--toml",
     is_flag=True,
     default=False,
-    help="Combine --input toml --output toml, mutally exclusive with other Combined options",
+    help="Combine --input toml --output json, mutally exclusive with other Combined options",
 )
 @click.option(
     "--xml",
     is_flag=True,
     default=False,
-    help="Combine --input xml --output xml, mutally exclusive with other Combined options",
+    help="Combine --input xml --output json, mutally exclusive with other Combined options",
 )
 @click.option(
     "--yaml",
     is_flag=True,
     default=False,
-    help="Combine --input yaml --output yaml, mutally exclusive with other Combined options",
+    help="Combine --input yaml --output json, mutally exclusive with other Combined options",
 )
 @click.option(
     "-i",

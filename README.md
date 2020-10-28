@@ -99,7 +99,7 @@ If anybody would contribute, there is an [open issue](https://github.com/mwillia
 # Usage
 
 ```
-$ wildq -i help
+$ wildq --help
 Usage: wildq [OPTIONS] JQ_FILTER [FILE]
 
 Options:
@@ -138,10 +138,11 @@ Options:
                                   mutally exclusive with Combined option
                                   (default input format)
 
+  --version                       Show the version and exit.
   --help                          Show this message and exit.
 ```
 
-For backward compatibility in previous version only `--[yaml|json|toml|ini|xml|hcl]` was possible with default to json output.
+> For backward compatibility in previous version only `--[yaml|json|toml|ini|xml|hcl]` was possible with default to json output.
 We still keep Monochrome, raw and json output with thoses options.
 Output was similar to `jq -MCr` (no color, no compact and no quote on single value)
 
