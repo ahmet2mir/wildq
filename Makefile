@@ -56,10 +56,10 @@ syntax: poetry.lock
 	poetry run flake8 wildq --count --exit-zero --statistics
 	poetry run bandit -r wildq
 
-upx:
-	@echo "Target upx"
-	curl -sL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar -xJ -C .
-	mv ./upx-3.96-amd64_linux upx
+# upx:
+# 	@echo "Target upx"
+# 	curl -sL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar -xJ -C .
+# 	mv ./upx-3.96-amd64_linux upx
 
 build: poetry.lock
 	@echo "Target build"
@@ -72,15 +72,13 @@ build: poetry.lock
 	mkdir -p artifacts/rpm
 	poetry build
 
-binary-linux: upx build
+binary-linux: build
 	@echo "Target binary-linux"
-	poetry run pyinstaller --upx-dir=upx --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
+	poetry run pyinstaller --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
 
 binary-macos: build
 	@echo "Target binary-macos"
-	brew install upx
-	ls /usr/local/Cellar/upx/3.96/bin
-	poetry run pyinstaller --upx-dir=/usr/local/Cellar/upx/3.96/bin   --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
+	poetry run pyinstaller --distpath artifacts/binaries --clean --onefile --name wildq wildq/__main__.py
 
 binary-copy:
 	chmod +x artifacts/binaries/wildq
