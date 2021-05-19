@@ -1,4 +1,4 @@
-
+i
 
 # wildq - Command-line TOML/JSON/INI/YAML/XML/HCL processor using jq c bindings
 
