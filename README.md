@@ -1,5 +1,3 @@
-
-
 # wildq - Command-line TOML/JSON/INI/YAML/XML/HCL processor using jq c bindings
 
 ![GitHub](https://img.shields.io/github/license/ahmet2mir/wildq.svg)
@@ -61,6 +59,14 @@ sudo yum install -y ./wildq-${VERSION}-1.x86_64.rpm
 
 wq --help
 wildq --help
+```
+
+## Gentoo
+
+[@zmedico](https://github.com/zmedico) did a portage on [app-misc](https://packages.gentoo.org/packages/app-misc/wildq)
+
+```
+emerge -av app-misc/wildq
 ```
 
 ## GNU/Linux Binary
