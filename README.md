@@ -289,6 +289,12 @@ do
 done
 ```
 
+You could also found some examples on some blogs/websites:
+
+* a complete guide with advanced examples on how to read/update files with differents processing tools [Original Japanese](https://yujiorama.hatenablog.com/entry/2021/03/21/113425) [Translate EN][https://translate.google.com/translate?sl=auto&tl=en&u=https://yujiorama.hatenablog.com/entry/2021/03/21/113425]
+
+* an example of INI manipulation made by AWS ParallelCluster Workshop [example 1](https://containers-on-pcluster.workshop.aws/setup/pcluster.html) [example 2](https://containers-on-pcluster.workshop.aws/setup/pcluster/pcluster-cfg/refine.html)
+
 ## TODO
 
 - [x] add tests...
