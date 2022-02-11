@@ -192,7 +192,7 @@ def cli(*args, **kwargs):
 
     for line in compiled:
         if not isinstance(line, dict) and not isinstance(line, list):
-            if raw:
+            if raw and not line is None:
                 print(line.strip('"'))
             else:
                 print(line)
