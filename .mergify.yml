@@ -1,0 +1,11 @@
+pull_request_rules:
+  - name: Add a queue label when PR is queued
+    description: Toggle the queue label when a pull request is (un)queued.
+    conditions:
+      - queue-position > 0
+    actions:
+      label:
+        add:
+          - mergify
+        toggle:
+          - merge-queued
